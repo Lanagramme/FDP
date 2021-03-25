@@ -47,7 +47,7 @@ function ficheDePerso(personnage){
 	let tableauDesStats =()=> {
 		obj = { type : 'div', className: 'tableauDesStats', enfants: [] }
 		
-		for (const [statistique, valeur ] in personnage.statistiques){
+		for (const [statistique, valeur ] of Object.entries(personnage.statistiques)){
 			obj.enfants.push({
 				type: 'div', 
 				className: 'stat field',
@@ -134,23 +134,26 @@ function ficheDePerso(personnage){
 let Arthur = new Personnage('Arthur', 'Chevalier', 'Humain', 'Héro')
 console.log(ficheDePerso(Arthur))
 
-function print(template){
+function print(template, parent){
+
 	let element = document.createElement(template.type)
 
 	for (let index in template ){
 		if (index == 'type')continue
-		else if (index == 'enfants'){}
+		else if (index == 'enfants'){ template[index].forEach( child => print( child, element) ) }
+		//here be the magic
 		else element[index] = template[index]
 	}
-	element.innerText = 'tesst'
+	//element.innerText = 'tesst'
 
-	document.getElementsByClassName('rendu')[0].appendChild(element)
+	parent.appendChild(element)
 	console.log(element)
+	cl(template)
 
 
 }
 
-print(ficheDePerso(Arthur))
+print(ficheDePerso(Arthur), document.getElementsByClassName('rendu')[0])
 
 /*
 {}{}{}{}{}{}{}{}{}
