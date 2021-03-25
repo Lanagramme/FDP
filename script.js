@@ -121,7 +121,7 @@ function ficheDePerso(personnage){
 	
 	return {
 		type: 'div',
-		className: 'ficheDePerso',
+		className: 'FicheDePerso',
 		enfants: [
 			header,
 			bandeauPresentation,
