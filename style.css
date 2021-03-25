@@ -1,0 +1,136 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.FicheDePerso {
+  max-width: 500px;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.FicheDePerso > *:not(h3) {
+  margin: 5px;
+  margin-bottom: 10px;
+}
+
+.FicheDePerso h3 {
+  padding-left: 20px;
+}
+
+.name {
+  border: 1px solid black;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  padding-right: 50px;
+}
+
+.bandeauStats, header, .identite, .field {
+  display: -ms-grid;
+  display: grid;
+}
+
+/* ======================== */
+header {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr auto;
+      grid-template-columns: 1fr auto;
+  height: 80px;
+  position: relative;
+  padding-left: 20px;
+}
+
+.level {
+  position: absolute;
+  border: 1px solid red;
+  border-radius: 50%;
+  height: 90px;
+  width: 90px;
+  right: -6px;
+  top: -3px;
+  background: white;
+}
+
+/* ======================== */
+.bandeauStats {
+  -ms-grid-columns: auto 1fr;
+      grid-template-columns: auto 1fr;
+}
+
+.bandeauStats .field:first-of-type {
+  margin-top: 0px;
+}
+
+.bandeauStats .field:last-of-type {
+  margin-bottom: 0px;
+}
+
+.portrait {
+  padding: 0;
+  width: 200px;
+}
+
+.portrait .image {
+  width: 150px;
+  height: 195px;
+  border: 1px solid red;
+  margin: 0 auto;
+}
+
+.field {
+  -ms-grid-columns: auto 1fr;
+      grid-template-columns: auto 1fr;
+  margin: 9px 0;
+}
+
+.logo {
+  border: 1px solid red;
+  height: 58px;
+  width: 58px;
+}
+
+.num {
+  border: 1px solid red;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+}
+
+/* ======================== */
+.identite {
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  padding: 5px;
+}
+
+.identite > * {
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  padding: 0 5px;
+}
+
+.bl {
+  border-left: 1px solid black;
+}
+
+/* ======================== */
+.item {
+  border: 1px solid black;
+}
+
+.name {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-left: 10px;
+}
+/*# sourceMappingURL=style.css.map */
