@@ -28,6 +28,12 @@ class Personnage {
 	}
 }
 
+class Item {
+	constructor (nom, illustration, description, prix){
+		[this.nom,this.illustration,this.description ,this.prix] = [nom, illustration, description, prix]
+	}
+}
+
 function ficheDePerso(personnage){
 	let nom = {
 		type: "h1", 
@@ -104,7 +110,7 @@ function ficheDePerso(personnage){
 		type: 'div', 
 		className: 'bandeauIdentite',
 		enfants: [
-			{ type: 'div', innerText: personnage.class},
+			{ type: 'div', innerText: personnage.classe},
 			{ type: 'div', className: 'bl', innerText: personnage.race},
 			{ type: 'div', className: 'bl', innerText: personnage.job},
 		]
@@ -131,11 +137,59 @@ function ficheDePerso(personnage){
 	}
 }
 
+function ficheItem(item){
+	let header = {
+		type: "header",
+		enfants: [
+			{
+				type: 'h3',
+				innerText: item.nom
+			}
+		]
+	}
+	
+	let illustration = {
+		type: 'img',
+		className : 'illustration',
+		href: item.illustration
+	}
+	
+	let desctiption = {
+		type: 'p',
+		innerText: item.description
+	}
+
+	let prix = 	{
+		type: 'div',
+		className: 'prix',
+		enfants: [
+			{
+				type: 'h3',
+				innerText: item.prix
+			}
+		]
+	}
+
+	return {
+		type: 'div',
+		className: 'FicheItem',
+		enfants: [
+			header,
+			illustration,
+			desctiption,
+			prix
+		]
+	}
+		
+		
+}
+
+
+
 let Arthur = new Personnage('Arthur', 'Chevalier', 'Humain', 'Héro')
-console.log(ficheDePerso(Arthur))
-
+let Potion = new Item('Potion','#', 'Une petite potion de soin', '1Go')
 function print(template, parent){
-
+	cl(template)
 	let element = document.createElement(template.type)
 
 	for (let index in template ){
@@ -147,17 +201,17 @@ function print(template, parent){
 	//element.innerText = 'tesst'
 
 	parent.appendChild(element)
-	console.log(element)
-	cl(template)
-
-
 }
 
 print(ficheDePerso(Arthur), document.getElementsByClassName('rendu')[0])
+print(ficheItem(Potion), document.getElementsByClassName('rendu')[0])
+
+
 
 /*
-{}{}{}{}{}{}{}{}{}
-[][][][][][][]
-[{},][{},][{},][{},][{},][{},]
+{}
+{}{}{}{}{}{}
+[][][][][][]
+[{},][{},][{},][{},]
 */
  

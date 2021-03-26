@@ -1,7 +1,41 @@
 *{ box-sizing: border-box; }
-
-.FicheDePerso{
+.FicheItem{ 
+    max-width: 300px; 
+    
+    header{
+        border: 1px solid black;  
+    }
+    
+}
+.FicheDePerso{ 
     max-width: 500px;
+    header{
+        display: grid;
+        grid-template-columns: 1fr auto;
+        height: 80px;
+        position: relative;
+        padding-left: 20px;
+        .niveau{
+            position: absolute;
+            border: 1px solid red;
+            border-radius: 50%;
+            height: 90px; width: 90px;
+            right: -6px; top: -3px;
+            background: white;
+            * {
+                margin: auto;
+                width: max-content;
+                display: block;
+                padding-top: 7px;
+            }
+        }
+    }
+
+}
+
+
+
+.FicheItem,.FicheDePerso{
     border: 1px solid black;
     padding: 5px;
     margin: 5px;
@@ -18,36 +52,13 @@
     border: 1px solid black;
     display: grid;
     place-items: center;
-    padding-right: 50px;
 }
 
-.bandeauStats,header,.identite,.field{
+.bandeauStats,header,.bandeauIdentite,.bandeauIdentite>*,.field{
     display: grid;
 }
 
 /* ======================== */
-
-
-header{
-    display: grid;
-    grid-template-columns: 1fr auto;
-    height: 80px;
-    position: relative;
-    padding-left: 20px;
-
-}
-
-.level{
-    position: absolute;
-    border: 1px solid red;
-    border-radius: 50%;
-    height: 90px; width: 90px;
-    right: -6px; top: -3px;
-    background: white;
-}
-
-/* ======================== */
-
 
 .bandeauStats{
     grid-template-columns: auto 1fr;
@@ -72,6 +83,10 @@ header{
     margin: 9px 0;
 }
 
+.stat.field>.name{
+    margin-left: 5px;
+}
+
 .logo{
     border: 1px solid red;
     height: 58px; width: 58px;
@@ -87,12 +102,11 @@ header{
 
 /* ======================== */
 
-.identite{
+.bandeauIdentite{
     grid-template-columns: 1fr 1fr 1fr;
     padding: 5px;
 }
-.identite>*{
-    display: grid;
+.bandeauIdentite>*{
     place-items: center;
     padding: 0 5px;
 }
@@ -122,4 +136,12 @@ header{
 //.{}{}{}{}{}{}
 
 
+@media (max-width: 238px) {
+  .bandeauStats {
+      display: block;
+  }
+  .portrait {
+      width: 100%;
+  }
+}
 
