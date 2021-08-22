@@ -3,6 +3,8 @@ class Personnage {
 	constructor(nom, classe, race, job){
 		[ this.nom, this.classe, this.race, this.job ]=[ nom, classe, race, job ]
 		this.portrait = ''
+		this.niveau = 1
+		this.inventaire = [{ name: 'Epée divine'}]
 		
 		this.statistiques = {
 			Force : 6,
@@ -11,11 +13,7 @@ class Personnage {
 			Chance : 7,
 			Charisme : 6
 		}
-		
-		this.niveau = 1
-		this.inventaire = [{ name: 'Epée divine'}]
 	}
-
 	structure = {
 		nom: 'string',
 		niveau: 'number',
@@ -29,102 +27,101 @@ class Personnage {
 }
 
 class Item {
-	constructor (nom, illustration, description, prix){
-		[this.nom,this.illustration,this.description ,this.prix] = [nom, illustration, description, prix]
+	constructor (nom, illustration, description, prix, usage){
+		[this.nom,this.illustration,this.description ,this.prix, this.usate] = [nom, illustration, description, prix, usage]
 	}
 }
 
 function ficheDePerso(personnage){
-	let nom = {
-		type: "h1", 
-		className: 'nom',
-		innerText: personnage.nom
-	}
-	
-	let niveau = {
-		type: "div", 
-		className: 'niveau',
-		enfants: [
-			{ type: 'span', innerText: 'Niveau' },
-			{ type: 'h1', innerText: personnage.niveau }
-		]
-	}
-	
-	let tableauDesStats =()=> {
-		obj = { type : 'div', className: 'tableauDesStats', enfants: [] }
-		
-		for (const [statistique, valeur ] of Object.entries(personnage.statistiques)){
-			obj.enfants.push({
-				type: 'div', 
-				className: 'stat field',
-				enfants: [
-					{ type: 'div', className: 'num', innerText: valeur },
-					{ type: 'div', className: 'name', innerText: statistique}		
-				]
-			})
+	const 
+		nom = {
+			type: "h1", 
+			className: 'nom',
+			innerText: personnage.nom
+		},
+		niveau = {
+			type: "div", 
+			className: 'niveau',
+			enfants: [
+				{ type: 'span', innerText: 'Niveau' },
+				{ type: 'h1', innerText: personnage.niveau }
+			]
+		},
+		tableauDesStats =()=> {
+			obj = { type : 'div', className: 'tableauDesStats', enfants: [] }
+			obj.enfants.push(
+				{
+					type: 'div', className:'life', enfants:[{type: 'div', className: 'bar'}]
+				}
+			)
+			
+			for (const [statistique, valeur ] of Object.entries(personnage.statistiques)){
+				obj.enfants.push({
+					type: 'div', 
+					className: 'stat field',
+					enfants: [
+						{ type: 'div', className: 'name', innerText: statistique}	,	
+						{ type: 'div', className: 'num', innerText: valeur },
+					]
+				})
+			}
+			return obj
+		},
+		tableauDInventaire =()=> {
+			let obj ={ type: 'div', enfants: []	}
+			
+			for (i of personnage.inventaire){
+				obj.enfants.push({
+					type: 'div', 
+					className: 'item field',
+					enfants: [
+						{ type: 'img', className: 'logo' }, 
+						{ type: 'div', className: 'name', enfants: [
+								{ type: 'p', innerText: i.name }
+							] 
+						}
+					]
+				})
+			}
+			return obj
+		},
+		header = { type: "header", enfants: [ nom, niveau ] },
+		bandeauPresentation = {
+			type: 'div', 							
+			className: 'bandeauStats',
+			enfants: [
+				{
+					type: 'div', 
+					className: 'portrait',
+					enfant: [
+						{
+							type: 'img', 
+							className: 'image',
+							href: personnage.portrait
+						}
+					]
+				},
+				tableauDesStats()
+			]
+		},
+		bandeauIdentite = {
+			type: 'div', 
+			className: 'bandeauIdentite',
+			enfants: [
+				{ type: 'div', innerText: personnage.classe},
+				{ type: 'div', className: 'bl', innerText: personnage.race},
+				{ type: 'div', className: 'bl', innerText: personnage.job},
+			]
+		},
+		inventaire = {
+			type: 'div', 
+			className: 'inventaire',
+			enfants: [
+				{ type: 'h3', innerText: 'Inventaire' },
+				tableauDInventaire()
+			]
 		}
-		return obj
-	}
-	
-	let tableauDInventaire =()=> {
-		let obj ={ type: 'div', enfants: []	}
-		
-		for (i of personnage.inventaire){
-			obj.enfants.push({
-				type: 'div', 
-				className: 'item field',
-				enfants: [
-					{ type: 'img', className: 'logo' }, 
-					{ type: 'div', className: 'name', enfants: [
-							{ type: 'p', innerText: i.name }
-						] 
-					}
-				]
-			})
-		}
-		return obj
-	}
-	
-	let header = { type: "header", enfants: [ nom, niveau ] }
-	
-	let bandeauPresentation = {
-		type: 'div', 
-		className: 'bandeauStats',
-		enfants: [
-			{
-				type: 'div', 
-				className: 'portrait',
-				enfant: [
-					{
-						type: 'img', 
-						className: 'image',
-						href: personnage.portrait
-					}
-				]
-			},
-			tableauDesStats()
-		]
-	}
-	
-	let bandeauIdentite = {
-		type: 'div', 
-		className: 'bandeauIdentite',
-		enfants: [
-			{ type: 'div', innerText: personnage.classe},
-			{ type: 'div', className: 'bl', innerText: personnage.race},
-			{ type: 'div', className: 'bl', innerText: personnage.job},
-		]
-	}
-	
-	let inventaire = {
-		type: 'div', 
-		className: 'inventaire',
-		enfants: [
-			{ type: 'h3', innerText: 'Inventaire' },
-			tableauDInventaire()
-		]
-	}
-	
+
 	return {
 		type: 'div',
 		className: 'FicheDePerso',
@@ -138,7 +135,7 @@ function ficheDePerso(personnage){
 }
 
 function ficheItem(item){
-	let header = {
+	const header = {
 		type: "header",
 		enfants: [
 			{
@@ -146,20 +143,17 @@ function ficheItem(item){
 				innerText: item.nom
 			}
 		]
-	}
-	
-	let illustration = {
+	},
+	illustration = {
 		type: 'img',
 		className : 'illustration',
 		href: item.illustration
-	}
-	
-	let desctiption = {
+	},
+	desctiption = {
 		type: 'p',
 		innerText: item.description
-	}
-
-	let prix = 	{
+	},
+	prix = 	{
 		type: 'div',
 		className: 'prix',
 		enfants: [
@@ -180,16 +174,13 @@ function ficheItem(item){
 			prix
 		]
 	}
-		
-		
 }
-
-
 
 let Arthur = new Personnage('Arthur', 'Chevalier', 'Humain', 'Héro')
 let Potion = new Item('Potion','#', 'Une petite potion de soin', '1Go')
+let Bandages = new Item('Bandages', '#', 'Bandelettes de gaze. Rends 5pv', '5Go', )
 function print(template, parent){
-	cl(template)
+	// cl(template)
 	let element = document.createElement(template.type)
 
 	for (let index in template ){
@@ -205,13 +196,3 @@ function print(template, parent){
 
 print(ficheDePerso(Arthur), document.getElementsByClassName('rendu')[0])
 print(ficheItem(Potion), document.getElementsByClassName('rendu')[0])
-
-
-
-/*
-{}
-{}{}{}{}{}{}
-[][][][][][]
-[{},][{},][{},][{},]
-*/
- 

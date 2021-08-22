@@ -16,23 +16,21 @@
 }
 
 .FicheDePerso header {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 1fr auto;
-      grid-template-columns: 1fr auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   height: 80px;
-  position: relative;
   padding-left: 20px;
+  margin-bottom: 15px !important;
 }
 
 .FicheDePerso header .niveau {
-  position: absolute;
-  border: 1px solid red;
   border-radius: 50%;
-  height: 90px;
-  width: 90px;
-  right: -6px;
-  top: -3px;
+  height: 80px;
+  width: 80px;
   background: white;
 }
 
@@ -47,7 +45,7 @@
 
 .FicheItem, .FicheDePerso {
   border: 1px solid black;
-  padding: 5px;
+  padding: 10px;
   margin: 5px;
 }
 
@@ -60,19 +58,11 @@
   padding-left: 20px;
 }
 
-.name {
-  border: 1px solid black;
-  display: -ms-grid;
-  display: grid;
-  place-items: center;
-}
-
 .bandeauStats, header, .bandeauIdentite, .bandeauIdentite > *, .field {
   display: -ms-grid;
   display: grid;
 }
 
-/* ======================== */
 /* ======================== */
 .bandeauStats {
   -ms-grid-columns: auto 1fr;
@@ -99,14 +89,37 @@
   margin: 0 auto;
 }
 
-.field {
+.field:not(.stat) {
   -ms-grid-columns: auto 1fr;
       grid-template-columns: auto 1fr;
   margin: 9px 0;
 }
 
-.stat.field > .name {
-  margin-left: 5px;
+.stat.field {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: #787482;
+  color: white;
+  height: 30px;
+  margin: 9px 0;
+}
+
+.stat.field > * {
+  margin: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-left: 15px;
 }
 
 .logo {
@@ -116,13 +129,22 @@
 }
 
 .num {
-  border: 1px solid red;
-  border-radius: 50%;
-  height: 30px;
-  width: 30px;
-  display: -ms-grid;
-  display: grid;
-  place-items: center;
+  position: relative;
+  width: 50px;
+  height: 100%;
+  background: #4a4750;
+  color: white;
+}
+
+.num::before {
+  position: absolute;
+  left: -10px;
+  -webkit-clip-path: polygon(0 0, 100% 100%, 100% 0);
+          clip-path: polygon(0 0, 100% 100%, 100% 0);
+  height: 100%;
+  width: 10px;
+  background: #4a4750;
+  content: '';
 }
 
 /* ======================== */
@@ -163,5 +185,20 @@
   .portrait {
     width: 100%;
   }
+}
+
+.life {
+  width: 100%;
+  height: 20px;
+  border: 1px solid #273444;
+  background-color: #273444;
+}
+
+.life .bar {
+  width: 50%;
+  height: 100%;
+  background: #00e803;
+  background: -webkit-gradient(linear, left top, right top, from(#00e803), color-stop(78%, #9dff05), to(white));
+  background: linear-gradient(90deg, #00e803 0%, #9dff05 78%, white 100%);
 }
 /*# sourceMappingURL=style.css.map */
