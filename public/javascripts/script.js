@@ -74,7 +74,7 @@ function inscription(){
 		}
 	}
 	var data = { 
-		nom: encodeURI(document.querySelector('input[name="user"]').value),
+		nom: encodeURI(document.querySelector('input[name="user"]').value.trim()),
 		mdp: encodeURI(document.querySelector('input[name="password"]').value),
 	}
 	
@@ -83,7 +83,7 @@ function inscription(){
 		url: "/inscription",
 		data: data
 	})
-	.done( res => cl(res) )
+	.done( res => window.location.href = `logged`)
 	.fail( res => cl(res))
 }
 
