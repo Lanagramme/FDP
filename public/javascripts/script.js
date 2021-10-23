@@ -1,4 +1,17 @@
 cl = console.log
+var statistiques_globales = {
+},
+liste_statistiques = [
+	"Force",
+	"Intelligence",
+	"Chance",
+	"Agilité",
+	"Charisme",
+]
+
+function rollDice(max) {
+  return Math.floor(Math.random() * max) +1;
+}
 
 function dashboard(){
 	const 
@@ -48,6 +61,73 @@ function formulaireConnexion(){
 	}
 }
 
+function formulaireCreationPersonnage(){
+	const 
+		result = {
+		element: 'form',
+		method: 'post',
+		className: 'm-3',
+		enfants : [
+			{ element: "h2", innerText:"Création de personnage", className: "mb-3"},
+			formControl({name: "nom", type: "text", text: "Nom du Personnage"}),
+			{ element: "div", innerText : "Ajouter les statistiques", className: "btn btn-primary", onclick: "rollStats()"},
+			{ element: "div", enfants: [], id: "stat_sheet"},
+			{ element: "div", /**type: "submit", */ className: "btn btn-primary", innerText: "Créer personnage", onclick: "creationPersonnage()"},
+		]
+	}
+
+	for (statistique of liste_statistiques) 
+		result.enfants[3].enfants.push(ajouter_statistique({nom: statistique, valeur : "0"}))
+
+	return result;
+}
+
+function creationPersonnage() {
+		if (encodeURI(document.querySelector("input").value) == "") {
+			alert("Donnez un nom au personngage !!")
+			return
+		}
+		if (statistiques_globales.Force === 0) {
+			alert('Ajoutez les statistiques du personnage !')
+			return
+		}
+
+		personnage = new Personnage(
+			encodeURI(document.querySelector('input[name="nom"]').value.trim()),
+			'Chevalier', 'Humain', 'Héro',
+			statistiques_globales
+		)
+		cl(personnage)
+	
+	// $.ajax({
+	// 	method: 'POST',
+	// 	url: "/store/character/",
+	// 	data: personnage
+	// })
+	// .done( res => cl(res))
+	// .fail( res => cl(res))
+}
+
+
+ajouter_statistique = (statistique) => {
+	return {
+		element: 'div', className:'d-flex', 
+		enfants : [
+			{ element : "div", innerText: statistique.nom + ' :', className: "pr-1"},
+			{ element : "div", innerText: statistique.valeur}
+		]
+	}
+}
+
+function rollStats(){
+	document.getElementById('stat_sheet').innerHTML = ""
+	for (stat of liste_statistiques){
+		let val = rollDice(6)
+		statistiques_globales[stat] = val
+		print(ajouter_statistique({nom: stat, valeur : val}), document.getElementById('stat_sheet'))
+	}
+}
+
 function formulaireInscription(){
 	return {
 		element: 'form',
@@ -83,7 +163,7 @@ function inscription(){
 		url: "/inscription",
 		data: data
 	})
-	.done( res => window.location.href = `logged`)
+	.done( res => cl(res))
 	.fail( res => cl(res))
 }
 

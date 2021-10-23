@@ -1,13 +1,11 @@
 
 class Personnage {
 	constructor(nom, classe, race, job, statistiques){
-		[ this.nom, this.classe, this.race, this.job ]=[ nom, classe, race, job ]
+		[ this.nom, this.classe, this.race, this.job, this.statistiques ]=[ nom, classe, race, job, statistiques ]
 		this.portrait = ''
 		this.niveau = 1
 		this.inventaire = []
 		this.or = 0
-		
-		this.statistiques = statistiques
 	}
 	structure = {
 		nom: 'string',
@@ -53,8 +51,6 @@ function ficheDePerso(personnage){
 					element: 'div', className:'life', enfants:[{element: 'div', className: 'bar'}]
 				}
 			)
-			cl(personnage)
-			cl(Object.entries(personnage.statistiques))
 			for (const [statistique, valeur ] of Object.entries(personnage.statistiques)){
 				obj.enfants.push({
 					element: 'div', 
@@ -202,3 +198,4 @@ const liste_items = [Potion, Bandages, Epee_divine, Rapiere]
 
 liste_items.sort((a, b) => (a.nom > b.nom) ? 1 : -1)
 liste_personages.sort((a, b) => (a.nom > b.nom) ? 1 : -1)
+
