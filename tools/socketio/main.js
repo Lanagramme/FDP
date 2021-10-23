@@ -12,7 +12,7 @@ io.on( "connection", socketioJwt.authorize({
   timeout: 15000
 })).on('authenticated', function( socket={} ) {
 
-  console.log(socket.decoded_token.email, 'has joined');
+  (socket.decoded_token && console.log(socket.decoded_token.email, 'has joined')) || console.log('Anonymous has joined') ;
   // console.log(socket.decoded_token);
   //socket.on('event')
 });
