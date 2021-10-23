@@ -13,7 +13,7 @@ read_all =(table)=> {
 // create one
 crate_one =(table, data)=>{
   data.id = uuid()
-  let _table = require(`${table}.json`)
+  let _table = read_all(`${table}.json`)
   _table.push(data)
   fs.writeFile(`${table}.json`,data)
 
@@ -22,7 +22,7 @@ crate_one =(table, data)=>{
 }
 
 delete_one =(table, id)=> {
-  let _table = require(`${table}.json`)
+  let _table = read_all(`${table}.json`)
   instance = _table.find(x => x.id === id)
   // supprimer instance de _table
   fs.writeFile(`${table}.json`,data)
