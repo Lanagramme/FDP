@@ -1,5 +1,25 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+
+function new_route(accumulator, item) {
+  accumulator[item.method](item.path, (req, res, next)=>{
+    res.render('index', {
+      title: 'Express',
+      params: { get: req.query, post: req.body },
+    });
+  })
+}
+
+/* 
+[
+  {
+    path: '/',
+    method: 'get',
+    page: 'index',
+    data: {foo: 'bars'}
+  }
+].reduce(new_route, router)
+ */
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
