@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const api = require('../tools/json_api/main')
 
 function new_route(accumulator, item) {
   accumulator[item.method](item.path, (req, res, next)=>{
@@ -29,7 +30,28 @@ router.get('/', function(req, res, next) {
 });
 router.post('/', function(req, res, next) {
   res.send(
-    (require('../tools/json_api/main')({data: req.body, action: 'read'})._id).toString()
+    (api({data: req.body, action: 'read'})._id).toString()
+  )
+});
+
+router.get('/store/*', function(req, res, next) {
+  res.send(
+    api(req.params[0].split('/'), req.body, 'read')
+  )
+});
+router.post('/store/*', function(req, res, next) {
+  res.send(
+    api(req.params[0].split('/'), req.body, 'create')
+  )
+});
+router.patch('/store/*', function(req, res, next) {
+  res.send(
+    api(req.params[0].split('/'), req.body, 'update')
+  )
+});
+router.delete('/store/*', function(req, res, next) {
+  res.send(
+    api(req.params[0].split('/'), req.body, 'delete')
   )
 });
 

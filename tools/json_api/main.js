@@ -1,17 +1,14 @@
 const fs = require('fs')
 const path = require('path');
 
-// fs.readFileSync()
-// fs.writeFileSync()
-function JAPI ({action, data, table="character"}) {
+module.exports = ([table, id], data, action) => {
   const
     file_path = path.join(__dirname, `../../store/${table}.json`),
     records = require(file_path) || [],
-    res = require(`./${action}`)(records, data)
-    console.log('res =>', res)
+    res = require(`./${action}`)(records, data, id);
+
+  console.log('res =>', res)
   fs.writeFileSync(file_path, JSON.stringify(records))
 
   return res
-}
-
-module.exports = JAPI;
+};

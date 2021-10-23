@@ -1,3 +1,4 @@
 node_modules/
-store/
+store
 store/character.json
+store/user.json
