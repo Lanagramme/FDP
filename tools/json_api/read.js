@@ -1,5 +1,4 @@
-function read (file_path, {id}={}) {
-  const table = require(file_path)
+function read (table, {id}={}) {
   return (id && table.find(item => item.id === id)) || table
 }
 
