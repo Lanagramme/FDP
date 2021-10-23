@@ -83,7 +83,7 @@ function inscription(){
 		url: "/inscription",
 		data: data
 	})
-	.done( () => window.location = "/" )
+	.done( res => cl(res) )
 	.fail( res => cl(res))
 }
 
