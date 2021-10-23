@@ -37,7 +37,7 @@ function formControl(input){
 function formulaireConnexion(){
 	return {
 		element: 'form',
-		methid: "post",
+		method: "post",
 		className: 'm-3',
 		enfants : [
 			{ element: "h2", innerText:"Connexion", className: "mb-3"},
@@ -51,7 +51,7 @@ function formulaireConnexion(){
 function formulaireInscription(){
 	return {
 		element: 'form',
-		methid: "post",
+		method: "post",
 		className: 'm-3',
 		enfants : [
 			{ element: "h2", innerText:"Inscription", className: "mb-3"},
