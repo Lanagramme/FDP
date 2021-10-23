@@ -37,6 +37,7 @@ function formControl(input){
 function formulaireConnexion(){
 	return {
 		element: 'form',
+		methid: "post",
 		className: 'm-3',
 		enfants : [
 			{ element: "h2", innerText:"Connexion", className: "mb-3"},
@@ -50,6 +51,7 @@ function formulaireConnexion(){
 function formulaireInscription(){
 	return {
 		element: 'form',
+		methid: "post",
 		className: 'm-3',
 		enfants : [
 			{ element: "h2", innerText:"Inscription", className: "mb-3"},
@@ -74,6 +76,10 @@ function print(template, parent){
 	//element.innerText = 'tesst'
 
 	parent.appendChild(element)
+}
+
+function roll(max) {
+  return Math.floor(Math.random() * max) +1;
 }
 
 const Root = document.querySelector('.rendu')
