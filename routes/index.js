@@ -42,7 +42,7 @@ router.post('/inscription', function(req, res, next) {
 });
 
 /* GET home page. */
-router.get('/logged', function(req, res, next) {
+router.all('/logged', function(req, res, next) {
   res.render('index', { title: 'Express', logged: true });
 });
 
