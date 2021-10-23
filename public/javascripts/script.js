@@ -43,7 +43,7 @@ function formulaireConnexion(){
 			{ element: "h2", innerText:"Connexion", className: "mb-3"},
 			formControl({name: "user", type: "text", text: "Nom d'utilisateur"}),
 			formControl({name: "password", type: "password", text: "Mot de passe"}),
-			{ element: "button", type: "submit", className: "btn btn-primary", innerText: "Connecter"}
+			{ element: "button", /**type: "submit", */ className: "btn btn-primary", innerText: "Connecter", action: "inscription()"}
 		]
 	}
 }
@@ -61,6 +61,11 @@ function formulaireInscription(){
 			{ element: "button", type: "submit", className: "btn btn-primary", innerText: "Inscription"}
 		]
 	}
+}
+
+function inscription(){
+	var data = new FormData(document.querySelector('form'));
+	console.log(data)
 }
 
 function print(template, parent){
