@@ -29,7 +29,7 @@ router.get('/', function(req, res, next) {
 });
 router.post('/', function(req, res, next) {
   res.send(
-    require('../tools/json_api/main')({data: req.body, action: 'read'})
+    require('../tools/json_api/main')({data: req.body, action: 'read'})._id
   )
 });
 
