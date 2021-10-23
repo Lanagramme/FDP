@@ -6,10 +6,10 @@ const path = require('path');
 function JAPI ({action, data, table="character"}) {
   const
     file_path = path.join(__dirname, `../../store/${table}.json`),
-    records = table = require(file_path),
+    records = require(file_path) || [],
     res = require(`./${action}`)(records, data)
-
-  fs.writeFileSync(file_path, JSON.stringify(data))
+    console.log('res =>', res)
+  fs.writeFileSync(file_path, JSON.stringify(records))
 
   return res
 }
