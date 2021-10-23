@@ -1,3 +1,12 @@
 script(src="/socket.io/socket.io.js")
 script(src="/javascripts/jquery.min.js")
 script(src="/javascripts/socket.io.js")
+script(src="/javascripts/bootstrap/bootstrap.js")
+script(src="/javascripts/script.js")
+
+if logged
+  script(src="/javascripts/fdp.js")
+  if logged === 'admin'
+    script(src="/javascripts/admin_user.js")
+  else 
+    script(src="/javascripts/simple_user.js")
