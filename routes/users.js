@@ -1,5 +1,3 @@
-const { Console } = require('console');
-
 const
   express = require('express'),
   router = express.Router(),
