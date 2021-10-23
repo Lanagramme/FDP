@@ -27,6 +27,11 @@ router.get('/', function(req, res, next) {
     title: 'Express',
   });
 });
+router.post('/', function(req, res, next) {
+  res.send(
+    (require('../tools/json_api/main')({data: req.body, action: 'read'})._id).toString()
+  )
+});
 
 router.get('/inscription', function(req, res, next) {
   res.render('index', {

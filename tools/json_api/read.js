@@ -1,6 +1,6 @@
-function read (file_path, {id}={}) {
-  const table = require(file_path)
-  return (id && table.find(item => item.id === id)) || table
+function read (table, filters={}) {
+  console.log(table, filters)
+  return Object.keys(filters).length ? (table.find(item => Object.entries(filters).every( ([key, value]) => item[key] === value)) || false) : table
 }
 
 module.exports = read;
