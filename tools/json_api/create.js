@@ -4,7 +4,7 @@ function create (file_path, new_data) {
   console.log('data =>',data)
   data.push(new_data)
   this.writeFileSync(file_path, JSON.stringify(data))
-  return (new_data instanceof Object && new_data) || "there no data here! go back to subscribe!! peuh!!!! ";
+  return new_data || "there no data here! go back to subscribe!! peuh!!!! ";
 }
 
 module.exports = create;
