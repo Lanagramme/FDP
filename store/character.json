@@ -1,1 +1,1 @@
-[{"user":"a","password":"b","repeat_password":"c"}]
+[{"user":"a","password":"b","repeat_password":"c"},{"user":"","password":"","repeat_password":""},{"nom":"test","mdp":"a"},{"nom":"alfa","mdp":"k"},{"nom":"new","mdp":"b"},{"nom":"alfo","mdp":"b"}]
