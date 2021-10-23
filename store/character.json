@@ -1,5 +1,1 @@
-{
-  "users": [
-    
-  ]
-}
+[{"user":"a","password":"b","repeat_password":"c"}]

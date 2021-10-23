@@ -6,7 +6,7 @@ function dashboard(){
 			element : 'nav',
 			className : 'navbar navbar-dark bg-primary d-flex flex-row-reverse px-2',
 			enfants: [
-				{ element: 'button', innerText: 'Deconnexion', className:'btn btn-outline-light' },
+				{ element: 'a', innerText: 'Deconnexion', className:'btn btn-outline-light', href: '/' },
 			]
 		}
 	
@@ -37,6 +37,7 @@ function formControl(input){
 function formulaireConnexion(){
 	return {
 		element: 'form',
+		method: 'post',
 		className: 'm-3',
 		enfants : [
 			{ element: "h2", innerText:"Connexion", className: "mb-3"},
@@ -50,6 +51,7 @@ function formulaireConnexion(){
 function formulaireInscription(){
 	return {
 		element: 'form',
+		method: 'post',
 		className: 'm-3',
 		enfants : [
 			{ element: "h2", innerText:"Inscription", className: "mb-3"},
