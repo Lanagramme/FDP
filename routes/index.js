@@ -30,6 +30,17 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.get('/home', function(req, res, next) {
+  res.render('index', {
+    title: 'Express',
+    home: true
+  });
+});
+router.post('/', function(req, res, next) {
+  res.send(
+    (api({data: req.body, action: 'read'})._id).toString()
+  )
+});
 
 router.get('/store/*', function(req, res, next) {
   res.send(

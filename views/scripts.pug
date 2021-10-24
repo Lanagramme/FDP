@@ -9,6 +9,8 @@ script(src="/javascripts/script.js")
 
 if !page.include('sign')
   script(src="/javascripts/safenav.js")
+if home
+  script(src="/javascripts/user.js")
 if logged
   script(src="/javascripts/fdp.js")
   if logged === 'admin'
