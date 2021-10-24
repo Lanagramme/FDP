@@ -195,6 +195,10 @@ liste_statistiques = [
 			data: data
 		})
 		.done( res => {
+			if (!res){
+				alert('Erreur dans les idantifiants')
+				return
+			}
 			cl(res)
 			print({ element: "a", innerText : '', href : "/", id:"in" }, Main)
 			window.localStorage.setItem('token', res._id)
@@ -466,6 +470,89 @@ function table(list){
 	}
 
 	return result
+}
+
+
+function modal_selection_partie(){
+
+}
+
+function modal(modal_info){
+  const modal = { 
+    element: "div",
+    className: "modal fade",
+    id: modal_info.nom, 
+    tabindex:"-1", 
+    "attr/aria-labelledby":modal_info.nom, 
+    "attr/aria-hidden":"true",
+    enfants : [
+      {
+        element:'div',
+        className: 'modal-dialog',
+        enfants : [ 
+          {
+            element:'div',
+            className: 'modal-content',
+            enfants : [
+              {
+                element:'div',
+                className: 'modal-header',
+                enfants: [
+                  {
+                    element: 'h5',
+                    className: 'modal-title', 
+                    id: modal_info.nom+'label', 
+                    innerText: modal_info.titre
+                  },
+                  {
+                    element:"button", 
+                    classname: "btn-close", 
+                    "attr/data-bs-dismiss":"modal", 
+                    "attr/aria-label":"Close"
+                  }
+                ]
+              },
+              {
+                element:"div",
+                className: "modal-body",
+                enfants : [ ...modal_info.body]
+              },
+              {
+                element:"div",
+                className: "modal-footer",
+                enfants : [
+                  {
+                    element: "button", 
+                    className: "btn btn-secondary",
+                    "attr/data-bs-dismiss": "modal", 
+                    innerText: "Annuler"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  return modal
+}
+
+function modal_scrolable(modal_info){
+  result = modal(modal_info)
+  result.enfants[0].className = "modal-dialog modal-dialog-scrollable"
+  return result
+}
+
+function modal_buttons(modal_info){
+	return {
+		element: "button", 
+		type: "button", 
+		className: "btn btn-primary", 
+		"attr/data-bs-toggle": "modal", 
+		"attr/data-bs-target": "#"+modal_info.nom,
+		innerHTML: modal_info.button
+	}
 }
 
 function print(template, parent){
