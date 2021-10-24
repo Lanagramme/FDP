@@ -65,13 +65,25 @@ function page_user(){
     page = { 
       element : "div", 
       enfants : [
+        { element: "div", id: "modals"},
         bandeau_accueil,
         persos,
         parties,
       ]
     }
 
+    modal_test_info = {
+      nom:"modal_test",
+      titre:"test",
+      body: [{
+        element: "p", innerText: "thit is a test"
+      }],
+      button: 'test'
+    }
+
     print(page, Main)
+    print(modal(modal_test_info), document.querySelector('#modals'))
+    print(modal_buttons(modal_test_info), Main)
 
     $.ajax({
       method: 'get',
@@ -92,10 +104,8 @@ function page_user(){
 
       games = res.filter( game => game.mj = window.localStorage.getItem('token'))
       games = games.map( game => [decodeURI(game.nom), decodeURI(game.mdp) == "" ? "aucun mot de passe" : decodeURI(game.mdp), launcher()])
-      cl(games)
       print(table([['Partie', "mdp", "launch"],...games]), dom_games)
     })
-
 }
 
 function page_player(){
@@ -122,6 +132,16 @@ function page_partie_en_cours_mj(){
     return
   }
 
+  buttons_control = {
+    element: "div",
+    className: "d-flex justify-content-between mb-3",
+    enfants : [
+      { element: 'button', className: 'btn btn-primary', innerText: "Ouvrir la partie"},
+      { element: 'button', className: 'btn btn-danger', innerText: "Fermer la partie"},
+      { element: 'button', className: 'btn btn-secondary', innerText: "Terminer la partie"}
+    ]
+  }
+  print(buttons_control, Main)
   print({element: "h1", innerText: "Players", domclass: "mb-3"}, Main)
   print({ element: "div", className: "d-flex flex-wrap", id:"players"},Main)
   print({element: "h1", innerText: "Items", domclass: "mb-3"}, Main)
