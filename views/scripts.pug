@@ -4,15 +4,20 @@ script(src="/javascripts/socket.io.js")
 script(src="/javascripts/bootstrap/bootstrap.js")
 script(src="/javascripts/script.js")
 
+
+
+
+if !page.include('sign')
+  script(src="/javascripts/safenav.js")
 if logged
   script(src="/javascripts/fdp.js")
   if logged === 'admin'
     script(src="/javascripts/admin_user.js")
   else 
     script(src="/javascripts/simple_user.js")
-else
-  if inscription
-    script(src="/javascripts/sign/up.js")
-  else 
-    script(src="/javascripts/sign/in.js")
+
+if page === "signup"
+  script(src="/javascripts/sign/up.js")
+if page === "signin"
+  script(src="/javascripts/sign/in.js")
 

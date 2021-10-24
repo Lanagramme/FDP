@@ -64,7 +64,7 @@ liste_statistiques = [
 				{ element: "h2", innerText:"Connexion", className: "mb-3"},
 				formControl({name: "user", type: "text", text: "Nom d'utilisateur"}),
 				formControl({name: "password", type: "password", text: "Mot de passe"}),
-				{ element: "button", /**type: "submit", */ className: "btn btn-primary", innerText: "Connecter", action: "inscription()"}
+				{ element: "div", onclick: "connexion()", className: "btn btn-primary", innerText: "Connecter", action: "inscription()"}
 			]
 		}
 	}
@@ -123,10 +123,34 @@ liste_statistiques = [
 		
 		$.ajax({
 			method: 'POST',
-			url: "/store/users/",
+			url: "/store/user/",
 			data: data
 		})
 		.done( res => cl(res))
+		.fail( res => cl(res))
+	}
+
+	function connexion(){
+		for (field of document.querySelectorAll("input")){
+			if (encodeURI(field.value) == "") {
+				alert("Tous les champs doivent être remplis !!")
+				return
+			}
+		}
+		var data = { 
+			nom: encodeURI(document.querySelector('input[name="user"]').value.trim()),
+			mdp: encodeURI(document.querySelector('input[name="password"]').value),
+		}
+		
+		$.ajax({
+			method: 'get',
+			url: "/store/user/",
+			data: data
+		})
+		.done( res => {
+			cl(res)
+			print({ element: "a", innerText : '', href : "/", id:"in" }, Main)
+		})
 		.fail( res => cl(res))
 	}
 

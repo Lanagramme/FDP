@@ -26,17 +26,14 @@ function new_route(accumulator, item) {
 router.get('/', function(req, res, next) {
   res.render('index', {
     title: 'Express',
+    page: 'signin'
   });
 });
-router.post('/', function(req, res, next) {
-  res.send(
-    (api({data: req.body, action: 'read'})._id).toString()
-  )
-});
+
 
 router.get('/store/*', function(req, res, next) {
   res.send(
-    api(req.params[0].split('/'), req.body, 'read')
+    api(req.params[0].split('/'), req.query, 'read')
   )
 });
 router.post('/store/*', function(req, res, next) {
@@ -58,15 +55,10 @@ router.delete('/store/*', function(req, res, next) {
 router.get('/inscription', function(req, res, next) {
   res.render('index', {
     title: 'Express',
-    inscription: true
+    page: 'signup'
   });
 });
 
-router.post('/inscription', function(req, res, next) {
-  res.send(
-    require('../tools/json_api/main')({data: req.body, action: 'create'})
-  )
-});
 
 /* GET home page. */
 router.all('/logged', function(req, res, next) {
