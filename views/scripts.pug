@@ -2,24 +2,13 @@ script(src="/socket.io/socket.io.js")
 script(src="/javascripts/jquery.min.js")
 script(src="/javascripts/socket.io.js")
 script(src="/javascripts/bootstrap/bootstrap.js")
+script(src="/javascripts/pages.js")
 script(src="/javascripts/script.js")
+script(src="/javascripts/fdp.js")
 
-
-
-
-if !page.include('sign')
-  script(src="/javascripts/safenav.js")
-if home
-  script(src="/javascripts/user.js")
-if logged
-  script(src="/javascripts/fdp.js")
-  if logged === 'admin'
-    script(src="/javascripts/admin_user.js")
-  else 
-    script(src="/javascripts/simple_user.js")
-
-if page === "signup"
-  script(src="/javascripts/sign/up.js")
-if page === "signin"
-  script(src="/javascripts/sign/in.js")
-
+//- script(src="/javascripts/user.js")
+//- script(src="/javascripts/fdp.js")
+//- script(src="/javascripts/admin_user.js")
+//- script(src="/javascripts/simple_user.js")
+//- script(src="/javascripts/sign/up.js")
+//- script(src="/javascripts/sign/in.js")

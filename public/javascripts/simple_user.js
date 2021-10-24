@@ -1,3 +1,3 @@
-print(diceRoller(), Main)
-print(formulaireCreationPersonnage(), Main)
-print(ficheDePerso(Arthur), Main)
+// print(diceRoller(), Main)
+// print(formulaireCreationPersonnage(), Main)
+// print(ficheDePerso(Arthur), Main)

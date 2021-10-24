@@ -100,6 +100,7 @@ liste_statistiques = [
 				formControl({name: "user", type: "text", text: "Nom d'utilisateur"}),
 				formControl({name: "password", type: "password", text: "Mot de passe"}),
 				formControl({name: "repeat_password", type: "password", text: "Repeter le Mot de passe"}),
+				{ element: "button", onclick: "inscription()", className: "btn btn-primary", innerText: "Inscription"},
 			]
 		}
 	}
@@ -126,7 +127,10 @@ liste_statistiques = [
 			url: "/store/user/",
 			data: data
 		})
-		.done( res => cl(res))
+		.done( res => {
+			window.localStorage.setItem('token', res._id)
+			page_user()
+		})
 		.fail( res => cl(res))
 	}
 
@@ -150,8 +154,16 @@ liste_statistiques = [
 		.done( res => {
 			cl(res)
 			print({ element: "a", innerText : '', href : "/", id:"in" }, Main)
+			window.localStorage.setItem('token', res._id)
+			page_user()
 		})
 		.fail( res => cl(res))
+	}
+
+	function deconnexion(){
+		window.localStorage.removeItem('token')
+
+		page_login()
 	}
 
 	function creationPersonnage() {
@@ -179,7 +191,6 @@ liste_statistiques = [
 		.done( res => cl(res))
 		.fail( res => cl(res))
 	}
-	
 
 function dashboard(){
 	const 
@@ -187,13 +198,12 @@ function dashboard(){
 			element : 'nav',
 			className : 'navbar navbar-dark bg-primary d-flex flex-row-reverse px-2',
 			enfants: [
-				{ element: 'a', innerText: 'Deconnexion', className:'btn btn-outline-light', href: '/' },
+				{ element: 'div', innerText: 'Deconnexion', className:'btn btn-outline-light', onclick: "deconnexion()" },
 			]
 		}
 	
 		return header
 }
-
 
 function diceRoller(){
 	return {
@@ -323,7 +333,68 @@ function table_one_column(name, list){
 			]
 		}
 
-	for (let item of list) result.enfants[2].enfants.push(row(item))
+	for (let item of list) result.enfants[1].enfants.push(row(item))
+
+	return result
+}
+
+function table(list){
+	const 
+		row = (items) => {
+			const row = {
+				element: 'tr', 
+				enfants : [ ]
+			},
+			head_item = (item)=> {
+				return {
+					element: 'td', 
+					"attr/scope" : "col",
+					innerText : item
+				}
+			}
+			for (item of items) row.enfants.push(head_item(item))
+			return row
+		},
+		head = (items) => {
+			const head_row = {
+				element: 'tr', 
+				enfants : [ ]
+			},
+			head_item = (item)=> {
+				return {
+					element: 'th', 
+					"attr/scope" : "col",
+					innerText : item
+				}
+			}
+			for (item of items) head_row.enfants.push(head_item(item))
+			return head_row
+		},
+		result = {
+			element: 'table',
+			className: 'table',
+			enfants : [
+				{
+					element: 'thead',
+					enfants : [ ]
+				},
+				{
+					element: 'tbody',
+					enfants : [ ]
+				}
+			]
+		}
+
+	let index = 0
+
+	for (items of list) {
+		if (index == 0) {
+			result.enfants[0].enfants.push(head(items))
+			index++
+			continue
+		}
+		result.enfants[1].enfants.push(row(items))
+	}
 
 	return result
 }
@@ -347,6 +418,8 @@ function print(template, parent){
 
 const Root = document.querySelector('.rendu')
 print(dashboard(), Root)
-print({element: "div", className:"container main"}, Root)
+print({element: "div", className:"container main mt-5"}, Root)
 
 const Main = document.querySelector('.main')
+
+page_login()
