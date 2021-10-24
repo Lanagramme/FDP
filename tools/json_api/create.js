@@ -1,4 +1,4 @@
-function create (records, new_item) {
+function create (records = [], new_item) {
   new_item._id = (new Date()).valueOf()
   records.push(new_item)
   console.log('records =>',records)

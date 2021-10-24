@@ -6,10 +6,9 @@ function safenav(){
   else return false;
 }
 
-
 function page_login(){
   $('.main').html('');
-  
+
   print(formulaireConnexion(), Main)
   print({ element: "div", innerText: "Créer un compte", onclick: "page_signin()", className: "pt-3 text-primary text-decoration-underline"}, Main)
 
@@ -35,7 +34,7 @@ function page_user(){
       className: "d-flex justify-content-between mb-3",
       enfants : [
         { element: "button", onclick: "", className: "btn btn-primary", innerText: "Rejoindre une partie" },
-        { element: "button", onclick: "", className: "btn btn-primary", innerText: "Créer une partie" },
+        { element: "button", onclick: "page_creation_partie()", className: "btn btn-primary", innerText: "Créer une partie" },
       ]
     }, 
     persos = {
@@ -53,7 +52,13 @@ function page_user(){
         {
           element: "h2", innerText: "Mes Parties"
         },
-        table_one_column('Personnages',["",""])
+        {
+          element: "div", 
+          id: 'games',
+          enfants : [
+            table([['Partie', "mdp"],["",""]])
+          ]
+        }
       ]
     }
 
@@ -67,6 +72,29 @@ function page_user(){
     }
 
     print(page, Main)
+
+    $.ajax({
+      method: 'get',
+      url: "/store/game/"
+    })
+    .done( res => {
+      const launcher = () => {
+        return {
+          elements: "button",
+          className: "btn btn-primary", 
+          innerText: "ouvrir",
+          onclick: "page_partie_en_cours_mj()"
+        }
+      }
+
+      dom_games = document.querySelector('#games')
+      dom_games.innerHTML = ""
+
+      games = res.filter( game => game.mj = window.localStorage.getItem('token'))
+      games = games.map( game => [decodeURI(game.nom), decodeURI(game.mdp) == "" ? "aucun mot de passe" : decodeURI(game.mdp), launcher()])
+      cl(games)
+      print(table([['Partie', "mdp", "launch"],...games]), dom_games)
+    })
 
 }
 
@@ -129,4 +157,39 @@ function page_partie_en_cours_player(){
   print(formulaireCreationPersonnage(), Main)
   print(ficheDePerso(Arthur), Main)
 
+}
+
+function page_creation_partie(){
+  $('.main').html('');
+  if (!safenav()) {
+    page_login()
+    return
+  }
+  const lien_retour = {
+    element : "span",
+    className: "m-3",
+    enfants : [
+      {
+        element : "i",
+        className: "bi bi-arrow-bar-left"
+      },
+      { 
+        element : 'span',
+        className: 'test-primary text-decoration-underline',
+        onclick : 'page_user()',
+        innerText: "retour"
+      }
+    ]
+  }
+  print(lien_retour, Main)
+  print(formulaireCreationPartie(), Main)
+}
+
+function page_creation_personnage(){
+  $('.main').html('');
+  if (!safenav()) {
+    page_login()
+    return
+  }
+  print(formulaireCreationPersonnage(), Main)
 }

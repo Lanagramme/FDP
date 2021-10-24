@@ -100,7 +100,22 @@ liste_statistiques = [
 				formControl({name: "user", type: "text", text: "Nom d'utilisateur"}),
 				formControl({name: "password", type: "password", text: "Mot de passe"}),
 				formControl({name: "repeat_password", type: "password", text: "Repeter le Mot de passe"}),
-				{ element: "button", onclick: "inscription()", className: "btn btn-primary", innerText: "Inscription"},
+				{ element: "div", onclick: "inscription()", className: "btn btn-primary", innerText: "Inscription"},
+			]
+		}
+	}
+
+	function formulaireCreationPartie(){
+		return {
+			element: 'form',
+			method: 'post',
+			className: 'm-3',
+			enfants : [
+				{ element: "h2", innerText:"Créer une partie", className: "mb-3"},
+				formControl({name: "nom", type: "text", text: "Donnez un nom à la partie"}),
+				formControl({name: "password", type: "password", text: "Définissez un mot de passe"}),
+				formControl({name: "repeat_password", type: "password", text: "Repetez le Mot de passe"}),
+				{ element: "div", onclick: "creationPartie()", className: "btn btn-primary", innerText: "Valider"},
 			]
 		}
 	}
@@ -129,6 +144,34 @@ liste_statistiques = [
 		})
 		.done( res => {
 			window.localStorage.setItem('token', res._id)
+			page_user()
+		})
+		.fail( res => cl(res))
+	}
+
+	function creationPartie(){
+		if ( encodeURI($('input[name="password"]').val()) != encodeURI($('input[name="repeat_password"]').val()) ) {
+			alert('les mots de passe ne correspondent pas !')
+			return
+		}
+		if (encodeURI($('input[name="nom"]').val()).trim() == "") {
+			alert("Tous les champs doivent être remplis !!")
+			return
+		}
+		var data = { 
+			nom: encodeURI(document.querySelector('input[name="nom"]').value.trim()),
+			mdp: encodeURI(document.querySelector('input[name="password"]').value),
+			characters: [],
+			mj: window.localStorage.getItem('token')
+		}
+		
+		$.ajax({
+			method: 'POST',
+			url: "/store/game/",
+			data: data
+		})
+		.done( res => {
+			alert(`Partie ${$('input[name="nom"]').val().trim()} créée avec success !`)
 			page_user()
 		})
 		.fail( res => cl(res))
@@ -196,9 +239,16 @@ function dashboard(){
 	const 
 		header = { 
 			element : 'nav',
-			className : 'navbar navbar-dark bg-primary d-flex flex-row-reverse px-2',
+			className : 'navbar navbar-dark bg-primary  px-2',
 			enfants: [
-				{ element: 'div', innerText: 'Deconnexion', className:'btn btn-outline-light', onclick: "deconnexion()" },
+				{ 
+					element: 'div',
+					className: 'container d-flex justify-space-between',
+					enfants : [
+						{ element: 'h3', innerText: 'Accueil', className:'text-white', onclick: "page_user()" },
+						{ element: 'div', innerText: 'Deconnexion', className:'btn btn-outline-light', onclick: "deconnexion()" },
+					]
+				}
 			]
 		}
 	
@@ -300,9 +350,14 @@ function accordion(name, list){
 function table_one_column(name, list){
 	const 
 		row = (item) => {
-			return {
-				element: 'td', 
-				innerText: item
+			return { 
+				element: 'tr', 
+				enfants: [
+					{
+						element: 'td', 
+						innerText: item
+					}
+				]
 			}
 		},
 		result = {
@@ -327,7 +382,7 @@ function table_one_column(name, list){
 				{
 					element: 'tbody',
 					enfants : [
-						{ element: 'tr', enfants: []}
+						
 					]
 				}
 			]
@@ -345,14 +400,28 @@ function table(list){
 				element: 'tr', 
 				enfants : [ ]
 			},
-			head_item = (item)=> {
-				return {
+			row_item = (item)=> {
+				this_row = {
 					element: 'td', 
 					"attr/scope" : "col",
-					innerText : item
 				}
+
+				if (typeof item === 'string') {
+					return {
+						element: 'td', 
+						"attr/scope" : "col",
+						innerText : item
+					}
+				} else {
+					return {
+						element: 'td', 
+						"attr/scope" : "col",
+						enfants: [ item ]
+					}
+				}
+				return this_row
 			}
-			for (item of items) row.enfants.push(head_item(item))
+			for (item of items) row.enfants.push(row_item(item))
 			return row
 		},
 		head = (items) => {
