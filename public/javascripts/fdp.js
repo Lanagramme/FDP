@@ -121,6 +121,7 @@ function ficheDePerso(personnage){
 	return {
 		element: 'div',
 		className: 'FicheDePerso',
+		onclick: "activePlayer()",
 		enfants: [
 			header,
 			bandeauPresentation,
