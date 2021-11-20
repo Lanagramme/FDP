@@ -22,8 +22,8 @@
   - [x] tableau liste des personnages
     - [x] Lire bdd
       - [x] bouton afficher
-  - [ ] tableau liste des parties
-    - [ ] Afficher
+  - [x] tableau liste des parties
+    - [x] Afficher
 
 ## Dashboard joueur
   - [ ] Lancée de dés

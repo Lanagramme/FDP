@@ -99,14 +99,15 @@ function page_user(){
           print(table([["Personnage", "Monde"],["", ""]]), document.getElementById('mes_persos'))
           return
         }
-        let liste_personages = []
-        cl(res)
-        for (perso of res){
-          liste_personages.push([
-            perso.nom, 
-            { element: "button", domclass: "btn btn-primary", innerText: "Afficher", onclick: "page_partie_en_cours_player()"}
-          ]) 
-        }
+        // let liste_personages = []
+        // cl(res)
+        // for (perso of res){
+        //   liste_personages.push([
+        //     perso.nom, 
+        //     { element: "button", className: "btn btn-primary", innerText: "Afficher", onclick: "page_partie_en_cours_player()"}
+        //   ]) 
+        // }
+        let liste_personages = res.map ( perso => [decodeURI(perso.nom), { element: "button", className: "btn btn-primary", innerText: "Afficher", onclick: "page_partie_en_cours_player()"}])
         $('#mes_persos').html('')
         print(table([["Personnage", "Monde"],...liste_personages]), document.getElementById('mes_persos'))
       }
@@ -115,7 +116,8 @@ function page_user(){
 
     $.ajax({
       method: 'get',
-      url: "/store/game/"
+      url: "/store/game/",
+      data: { mj: window.localStorage.token}
     })
     .done( res => {
       const launcher = () => {
@@ -130,8 +132,7 @@ function page_user(){
       dom_games = document.querySelector('#games')
       dom_games.innerHTML = ""
 
-      games = res.filter( game => game.mj = window.localStorage.getItem('token'))
-      games = games.map( game => [decodeURI(game.nom), decodeURI(game.mdp) == "" ? "aucun mot de passe" : decodeURI(game.mdp), launcher()])
+      games = res.map( game => [decodeURI(game.nom), decodeURI(game.mdp) == "" ? "aucun mot de passe" : decodeURI(game.mdp), launcher()])
       print(table([['Partie', "mdp", "launch"],...games]), dom_games)
     })
 }
@@ -170,9 +171,9 @@ function page_partie_en_cours_mj(){
     ]
   }
   print(buttons_control, Main)
-  print({element: "h1", innerText: "Players", domclass: "mb-3"}, Main)
+  print({element: "h1", innerText: "Players", className: "mb-3"}, Main)
   print({ element: "div", className: "d-flex flex-wrap", id:"players"},Main)
-  print({element: "h1", innerText: "Items", domclass: "mb-3"}, Main)
+  print({element: "h1", innerText: "Items", className: "mb-3"}, Main)
   print({ element: "div", className: "d-flex flex-wrap", id: "items"},Main)
 
   Players = document.querySelector('#players')
