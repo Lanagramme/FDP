@@ -13,7 +13,7 @@
 ## Accueil user
   - [x] Bouton création de partie
   - [x] Bouton rejoindre une parties ouverte
-    - [ ] tableau liste des parties en cours
+    - [ ] tableau liste des parties ouverte
       - [ ] Lire bdd
     - [ ] bouton rejoindre
     - [ ] confirm acceptation pour mj
@@ -26,15 +26,15 @@
     - [x] Afficher
 
 ## Dashboard joueur
-  - [ ] Lancée de dés
+  - [x] Lancé de dés
   - [ ] FDP
     - [ ] Inventaire
         - [ ] FDO
     
 ## Dashboard mj
-  - [ ] Ouvrir la partie
-  - [ ] Fermer la partie
-  - [ ] Terminer la partie
+  - [x] Ouvrir la partie
+  - [x] Fermer la partie
+  - [x] Terminer la partie
   - [ ] Afficher les FDP des joueurs
   - [ ] Afficher les FDO de tous les objets de la partie
   - [ ] Afficher les fiches de tous les monstres

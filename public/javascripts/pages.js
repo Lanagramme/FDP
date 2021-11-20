@@ -1,4 +1,5 @@
-var login_token = ""
+var login_token = "",
+global_user_games = []
 
 function safenav(){
   token = window.localStorage.getItem('token');
@@ -129,6 +130,8 @@ function page_user(){
         }
       }
 
+      global_user_games = res
+
       dom_games = document.querySelector('#games')
       dom_games.innerHTML = ""
       games = res.map( game => [decodeURI(game.nom), decodeURI(game.mdp) == "" ? "aucun mot de passe" : decodeURI(game.mdp), launcher(game._id)])
@@ -254,5 +257,8 @@ function update_status_partie(id, status){
   })
   .done(function(res){
     if (res == "NOT FOUND") alert('Erreur de server !')
+    else {
+      global_game = global_user_games.find( x => x._id == id)
+    }
   })
 }
