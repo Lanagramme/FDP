@@ -166,9 +166,9 @@ function page_partie_en_cours_mj(partie_id){
     element: "div",
     className: "d-flex justify-content-between mb-3",
     enfants : [
-      { element: 'button', className: 'btn btn-primary', innerText: "Ouvrir la partie", onclick: "ouvrir_partie(" + partie_id + ")"},
-      { element: 'button', className: 'btn btn-danger', innerText: "Fermer la partie"},
-      { element: 'button', className: 'btn btn-secondary', innerText: "Terminer la partie"}
+      { element: 'button', className: 'btn btn-primary', innerText: "Ouvrir la partie", onclick: "update_status_partie(" + partie_id + ", 'ouvert')"},
+      { element: 'button', className: 'btn btn-danger', innerText: "Fermer la partie", onclick: "update_status_partie(" + partie_id + ", 'ferme')"},
+      { element: 'button', className: 'btn btn-secondary', innerText: "Terminer la partie", onclick: "update_status_partie(" + partie_id + ", 'fini')"},
     ]
   }
   print(buttons_control, Main)
@@ -245,11 +245,12 @@ function page_creation_personnage(){
   print(formulaireCreationPersonnage(), Main)
 }
 
-function ouvrir_partie(id){
+function update_status_partie(id, status){
+
   $.ajax({
     method: 'patch',
     url: '/store/game/'+id,
-    data: { status: "ouvert" }
+    data: { status: status }
   })
   .done(function(res){
     if (res == "NOT FOUND") alert('Erreur de server !')
