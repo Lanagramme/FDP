@@ -11,7 +11,7 @@ liste_statistiques = [
 
 // Utilitaires
 	function rollDice(max) {
-		return Math.floor(Math.random() * max) +1;
+		return Math.floor(Math.random() * max) + 1;
 	}
 
 	ajouter_statistique = (statistique) => {
@@ -265,7 +265,27 @@ function dashboard(){
 		return header
 }
 
+function dices(n=1) {
+	const arr = []
+	do {
+		const dice = n > 5 ? 6 : n;
+		arr.push({
+			element: "i",
+			className: `bi bi-dice-${dice} mx-3`,
+			style: "transform: scale(2); display: inherit;"
+		})
+		n -= dice
+	} while(n)
+
+	return {
+		element: "div",
+		className: "d-flex justify-content-center",
+		enfants : arr
+	}
+}
+
 function diceRoller(){
+
 	return {
 		element: "div",
 		className: "card m-2",
@@ -285,16 +305,17 @@ function diceRoller(){
 						className: 'mb-3',
 						innerText: "Lancer le dé",
 					},
-					{ 
-						element: "i",
-						className: "bi bi-dice-2",
-						style: "transform: scale(2); display: inherit;"
+					{
+						element: "div",
+						id: "dice-container",
+						enfants : [dices()]
 					},
 					{ element: 'br'},
 					{ 
 						element: "div",
 						className: "btn btn-primary", 
-						innerText: "Go!"
+						innerText: "Go!",
+						onclick: "print(dices(rollDice(20)), document.getElementById('dice-container'), true)"
 					}
 				]
 			}
@@ -429,6 +450,7 @@ function table(list){
 						enfants: [ item ]
 					}
 				}
+				
 				return this_row
 			}
 			for (item of items) row.enfants.push(row_item(item))
@@ -563,7 +585,7 @@ function modal_buttons(modal_info){
 
 function print(template, parent, flush){
 	// cl(template)
-	if (flush) parent.innertext = ""
+	if (flush) parent.innerText = ""
 	let element = document.createElement(template.element)
 
 	for (let index in template ){
