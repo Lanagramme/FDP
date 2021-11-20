@@ -162,7 +162,8 @@ liste_statistiques = [
 			nom: encodeURI(document.querySelector('input[name="nom"]').value.trim()),
 			mdp: encodeURI(document.querySelector('input[name="password"]').value),
 			characters: [],
-			mj: window.localStorage.getItem('token')
+			mj: window.localStorage.getItem('token'),
+			status: "ferme"
 		}
 		
 		$.ajax({
@@ -563,7 +564,7 @@ function modal_buttons(modal_info){
 
 function print(template, parent, flush){
 	// cl(template)
-	if (flush) parent.innertext = ""
+	if (flush) parent.innerText = ""
 	let element = document.createElement(template.element)
 
 	for (let index in template ){

@@ -120,19 +120,18 @@ function page_user(){
       data: { mj: window.localStorage.token}
     })
     .done( res => {
-      const launcher = () => {
+      const launcher = (id) => {
         return {
           elements: "button",
           className: "btn btn-primary", 
           innerText: "Afficher",
-          onclick: "page_partie_en_cours_mj()"
+          onclick: "page_partie_en_cours_mj(" +id+")"
         }
       }
 
       dom_games = document.querySelector('#games')
       dom_games.innerHTML = ""
-
-      games = res.map( game => [decodeURI(game.nom), decodeURI(game.mdp) == "" ? "aucun mot de passe" : decodeURI(game.mdp), launcher()])
+      games = res.map( game => [decodeURI(game.nom), decodeURI(game.mdp) == "" ? "aucun mot de passe" : decodeURI(game.mdp), launcher(game._id)])
       print(table([['Partie', "mdp", "launch"],...games]), dom_games)
     })
 }
@@ -154,18 +153,20 @@ function page_mj(){
   }
 }
 
-function page_partie_en_cours_mj(){
+function page_partie_en_cours_mj(partie_id){
   $('.main').html('');
   if (!safenav()) {
     page_login()
     return
   }
 
+  partie_globale = partie_id
+
   buttons_control = {
     element: "div",
     className: "d-flex justify-content-between mb-3",
     enfants : [
-      { element: 'button', className: 'btn btn-primary', innerText: "Ouvrir la partie"},
+      { element: 'button', className: 'btn btn-primary', innerText: "Ouvrir la partie", onclick: "ouvrir_partie(" + partie_id + ")"},
       { element: 'button', className: 'btn btn-danger', innerText: "Fermer la partie"},
       { element: 'button', className: 'btn btn-secondary', innerText: "Terminer la partie"}
     ]
@@ -182,6 +183,7 @@ function page_partie_en_cours_mj(){
   for (player of liste_personages) print(ficheDePerso(player), Players)
   
   for (item of liste_items) print(ficheItem(item), Items)
+  
   
   // récupérer les infor du perso dans la base
   // $.ajax({
@@ -241,4 +243,15 @@ function page_creation_personnage(){
     return
   }
   print(formulaireCreationPersonnage(), Main)
+}
+
+function ouvrir_partie(id){
+  $.ajax({
+    method: 'patch',
+    url: '/store/game/'+id,
+    data: { status: "ouvert" }
+  })
+  .done(function(res){
+    if (res == "NOT FOUND") alert('Erreur de server !')
+  })
 }
