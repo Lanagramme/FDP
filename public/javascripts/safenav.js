@@ -1,3 +1,5 @@
+// Renvoie automatique ves la page d'accueil des utilisteurs non connectés
+
 const token = localStorage.getItem('token');
 
 if (!token) {
