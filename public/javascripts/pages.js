@@ -34,7 +34,7 @@ function page_user(){
       element: "div", 
       className: "d-flex justify-content-between mb-3",
       enfants : [
-        { element: "button", onclick: "", className: "btn btn-primary", innerText: "Rejoindre une partie" },
+        { element: "button", onclick: "", className: "btn btn-primary", innerText: "Rejoindre une partie", onclick: "join()" },
         { element: "button", onclick: "page_creation_partie()", className: "btn btn-primary", innerText: "Créer une partie" },
       ]
     }, 
