@@ -201,7 +201,7 @@ liste_statistiques = [
 			}
 			cl(res)
 			print({ element: "a", innerText : '', href : "/", id:"in" }, Main)
-			window.localStorage.setItem('token', res._id)
+			window.localStorage.setItem('token', res[0]._id)
 			page_user()
 		})
 		.fail( res => cl(res))
@@ -222,11 +222,17 @@ liste_statistiques = [
 				alert('Ajoutez les statistiques du personnage !')
 				return
 			}
+
+			if (!window.localStorage.token) {
+				page_login()
+				return
+			}
 	
 			personnage = new Personnage(
 				encodeURI(document.querySelector('input[name="nom"]').value.trim()),
 				'Chevalier', 'Humain', 'Héro',
-				statistiques_globales
+				statistiques_globales,
+				window.localStorage.token
 			)
 			// cl(personnage)
 		
