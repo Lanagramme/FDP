@@ -1,32 +1,10 @@
-const express = require('express');
-const router = express.Router();
-const api = require('../tools/json_api/main')
+function newApiRoute(acc, item) {
+  acc[item.method](item.path, (req, res, next)=>{
+    res.send(
+      require('../tools/json_api/main')(req.params[0].split('/'), req[item.method === "get" ? 'query': 'body'], item.action)
+    )
+  })
+  return acc
+}
 
-router.post('/', function(req, res, next) {
-  res.send(
-    (api({data: req.body, action: 'read'})._id).toString()
-  )
-});
-
-router.get('/*', function(req, res, next) {
-  res.send(
-    api(req.params[0].split('/'), req.query, 'read')
-  )
-});
-router.post('/*', function(req, res, next) {
-  res.send(
-    api(req.params[0].split('/'), req.body, 'create')
-  )
-});
-router.patch('/*', function(req, res, next) {
-  res.send(
-    api(req.params[0].split('/'), req.body, 'update')
-  )
-});
-router.delete('/*', function(req, res, next) {
-  res.send(
-    api(req.params[0].split('/'), req.body, 'delete')
-  )
-});
-
-  module.exports = router;
+module.exports = require('../package.json').routes.api.reduce( newApiRoute, require('express').Router() );
