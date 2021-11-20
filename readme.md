@@ -11,13 +11,17 @@
   - [x] lien formulaire de connexion
 
 ## Accueil user
-  - [x] Boutton création de partie
-  - [x] Formulaire de création de personnage
-    - [-] Ecrire en bdd
+  - [x] Bouton création de partie
+  - [x] Bouton rejoindre une parties ouverte
+    - [ ] tableau liste des parties en cours
+      - [ ] Lire bdd
+    - [ ] bouton rejoindre
+    - [ ] confirm acceptation pour mj
+        - [x] Formulaire de création de personnage
+          - [x] Ecrire en bdd
   - [ ] tableau liste des personnages
     - [ ] Lire bdd
-    - [ ] rejoindre
-      - [ ] Boutton création de personnage
+    - [ ] bouton rejoindre
   - [ ] tableau liste des parties
     - [ ] Afficher
 

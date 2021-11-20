@@ -7,16 +7,16 @@ class Personnage {
 		this.inventaire = []
 		this.or = 0
 	}
-	structure = {
-		nom: 'string',
-		niveau: 'number',
-		portrait: 'string',
-		statistiques: 'object',
-		inventaire: 'array',
-		classe: 'string',
-		race: 'string',
-		job: 'string'
-	}
+	// structure = {
+	// 	nom: 'string',
+	// 	niveau: 'number',
+	// 	portrait: 'string',
+	// 	statistiques: 'object',
+	// 	inventaire: 'array',
+	// 	classe: 'string',
+	// 	race: 'string',
+	// 	job: 'string'
+	// }
 	empoche(x){
 		this.inventaire.push(x)
 		this.inventaire.sort((a, b) => (a.nom > b.nom) ? 1 : -1)
