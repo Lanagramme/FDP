@@ -13,6 +13,7 @@
 ## Accueil user
   [x] Boutton création de partie
   [ ] Boutton création de personnage
+  [x] Formulaire de création de personnage
   [ ] tableau liste des personnages
   [ ] tableau liste des parties
 
