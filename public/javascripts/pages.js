@@ -40,10 +40,10 @@ function page_user(){
     persos = {
       element : "div", 
       enfants : [
-        {
-          element: "h2", innerText: "Mes Persos"
-        },
-        table([["Personnage", "Monde"],["", ""]])
+        { element: "h2", innerText: "Mes Persos" },
+        { element: "div", id: "mes_persos", enfants:[
+          table([["Personnage", "Monde"],["Loading", "Loading"]])
+        ]}
       ]
     }, 
     parties = {
@@ -84,6 +84,34 @@ function page_user(){
     print(page, Main)
     print(modal(modal_test_info), document.querySelector('#modals'))
     print(modal_buttons(modal_test_info), Main)
+
+    
+
+
+    $.ajax({
+      method: 'get',
+      url: "/store/character/",
+      data: {user : window.localStorage.token}
+    })
+    .done( 
+      res => {
+        if (res == 'NOT FOUND') {
+          print(table([["Personnage", "Monde"],["", ""]]), document.getElementById('mes_persos'))
+          return
+        }
+        let liste_personages = []
+        cl(res)
+        for (perso of res){
+          liste_personages.push([
+            perso.nom, 
+            { element: "button", domclass: "btn btn-primary", innerText: "Afficher", onclick: "page_partie_en_cours_player()"}
+          ]) 
+        }
+        $('#mes_persos').html('')
+        print(table([["Personnage", "Monde"],...liste_personages]), document.getElementById('mes_persos'))
+      }
+    )
+
 
     $.ajax({
       method: 'get',

@@ -1,7 +1,7 @@
 
 class Personnage {
-	constructor(nom, classe, race, job, statistiques){
-		[ this.nom, this.classe, this.race, this.job, this.statistiques ]=[ nom, classe, race, job, statistiques ]
+	constructor(nom, classe, race, job, statistiques, user){
+		[ this.nom, this.classe, this.race, this.job, this.statistiques, this.user ]=[ nom, classe, race, job, statistiques, user ]
 		this.portrait = ''
 		this.niveau = 1
 		this.inventaire = []

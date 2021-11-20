@@ -19,9 +19,9 @@
     - [ ] confirm acceptation pour mj
         - [x] Formulaire de création de personnage
           - [x] Ecrire en bdd
-  - [ ] tableau liste des personnages
-    - [ ] Lire bdd
-    - [ ] bouton rejoindre
+  - [x] tableau liste des personnages
+    - [x] Lire bdd
+      - [x] bouton afficher
   - [ ] tableau liste des parties
     - [ ] Afficher
 
