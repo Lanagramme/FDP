@@ -75,31 +75,6 @@ function new_route(item) {
 //   res.render('index', { title: 'Express', logged: true });
 // });
 
-router.post('/', function(req, res, next) {
-  res.send(
-    (api({data: req.body, action: 'read'})._id).toString()
-  )
-});
 
-router.get('/store/*', function(req, res, next) {
-  res.send(
-    api(req.params[0].split('/'), req.query, 'read')
-  )
-});
-router.post('/store/*', function(req, res, next) {
-  res.send(
-    api(req.params[0].split('/'), req.body, 'create')
-  )
-});
-router.patch('/store/*', function(req, res, next) {
-  res.send(
-    api(req.params[0].split('/'), req.body, 'update')
-  )
-});
-router.delete('/store/*', function(req, res, next) {
-  res.send(
-    api(req.params[0].split('/'), req.body, 'delete')
-  )
-});
 
 module.exports = router;
