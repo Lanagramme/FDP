@@ -94,7 +94,7 @@ function page_user(){
         return {
           elements: "button",
           className: "btn btn-primary", 
-          innerText: "ouvrir",
+          innerText: "Afficher",
           onclick: "page_partie_en_cours_mj()"
         }
       }

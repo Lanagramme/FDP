@@ -195,7 +195,7 @@ liste_statistiques = [
 			data: data
 		})
 		.done( res => {
-			if (!res){
+			if (res == "NOT FOUND"){
 				alert('Erreur dans les idantifiants')
 				return
 			}

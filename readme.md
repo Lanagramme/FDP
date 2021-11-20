@@ -2,7 +2,7 @@
 
 ## Page de connexion
   - [x] formulaire de connexion 
-  - [ ] vérification des identifiants
+  - [x] vérification des identifiants
   - [x] lien formulaire de création de compte
 
 ## Page d'inscription
@@ -12,16 +12,14 @@
 
 ## Accueil user
   - [x] Boutton création de partie
-  - [ ] Boutton création de personnage
   - [x] Formulaire de création de personnage
     - [-] Ecrire en bdd
   - [ ] tableau liste des personnages
     - [ ] Lire bdd
     - [ ] rejoindre
+      - [ ] Boutton création de personnage
   - [ ] tableau liste des parties
     - [ ] Afficher
-    - [ ] Fermer
-    - [ ] Terminer
 
 ## Dashboard joueur
   - [ ] Lancée de dés
@@ -30,16 +28,11 @@
         - [ ] FDO
     
 ## Dashboard mj
-  - [ ] T
-  - [ ] Boutton création de personnage
-  - [x] Formulaire de création de personnage
-    - [-] Ecrire en bdd
-  - [ ] tableau liste des personnages
-    - [ ] Lire bdd
-    - [ ] rejoindre
-  - [ ] tableau liste des parties
-    - [ ] Afficher
-    - [ ] Fermer
-    - [ ] Terminer
+  - [ ] Ouvrir la partie
+  - [ ] Fermer la partie
+  - [ ] Terminer la partie
+  - [ ] Afficher les FDP des joueurs
+  - [ ] Afficher les FDO de tous les objets de la partie
+  - [ ] Afficher les fiches de tous les monstres
 
 
