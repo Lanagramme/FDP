@@ -14,11 +14,32 @@
   [x] Boutton création de partie
   [ ] Boutton création de personnage
   [x] Formulaire de création de personnage
+    [-] Ecrire en bdd
   [ ] tableau liste des personnages
+    [ ] Lire bdd
+    [ ] rejoindre
   [ ] tableau liste des parties
+    [ ] Afficher
+    [ ] Fermer
+    [ ] Terminer
 
 ## Dashboard joueur
-
+  [ ] Lancée de dés
+  [ ] FDP
+    [ ] Inventaire
+        [ ] FDO
+    
 ## Dashboard mj
+  [ ] T
+  [ ] Boutton création de personnage
+  [x] Formulaire de création de personnage
+    [-] Ecrire en bdd
+  [ ] tableau liste des personnages
+    [ ] Lire bdd
+    [ ] rejoindre
+  [ ] tableau liste des parties
+    [ ] Afficher
+    [ ] Fermer
+    [ ] Terminer
 
 
