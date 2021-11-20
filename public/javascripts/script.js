@@ -561,8 +561,9 @@ function modal_buttons(modal_info){
 	}
 }
 
-function print(template, parent){
+function print(template, parent, flush){
 	// cl(template)
+	if (flush) parent.innertext = ""
 	let element = document.createElement(template.element)
 
 	for (let index in template ){
