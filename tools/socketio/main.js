@@ -1,5 +1,5 @@
 const io = require("socket.io")();
-// const socketioJwt = require("socketio-Jwt");
+const socketioJwt = require("socketio-jwt");
 
 const socketapi = {
   io
@@ -7,23 +7,23 @@ const socketapi = {
 
 const gEmit = io.sockets.emit
 // Add your socket.io logic here!
-io.on( "connection", /**socketioJwt.authorize({
+io.on( "connection", socketioJwt.authorize({
   secret: 'test123',
   // handshake: true,
   timeout: 15000
-})).on('authenticated', */ function( socket={} ) {
+})).on('authenticated', function( socket={} ) {
 
-  const emit = socket.emit
-
+  const emit = socket.emit;
+  
   (socket.decoded_token && console.log(socket.decoded_token.email, 'has joined')) || console.log('Anonymous has joined') ;
-  // console.log(socket.decoded_token);
+  console.log('decoded =>',socket.decoded_token);
 
-  console.log(socket.id)
+  console.log("socket id =>",socket.id)
   //socket.on('event')
 
 
   socket.on('getRoomsList', function() {
-    emit( 'rooms', Object.keys(io.socket.adapter.rooms) );
+    emit( 'rooms', Object.keys(io.sockets.adapter.rooms) );
   });
 
   // io.sockets.adapter.on("create-room", (room) => {  console.log(`Room ${room} was created`);});
@@ -36,7 +36,7 @@ io.on( "connection", /**socketioJwt.authorize({
   });
   
   socket.on('joinRoom', function(roomName) {
-    console.log(socket.id)
+    console.log(socket.id," join")
     if(Object.keys(io.sockets.adapter.rooms).includes(roomName)) socket.join(roomName), Gemit('user-msg', `Socket ${id} has joined room ${roomName}`); 
     else emit('user-msg', `La partie nommée "${roomName}" est introuvable`);
   });
