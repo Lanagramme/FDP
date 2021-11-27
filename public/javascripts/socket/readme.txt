@@ -1,0 +1,1 @@
+organise le code socketio.js dans se repertoire comme bon te semble.
