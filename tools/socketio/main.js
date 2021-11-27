@@ -1,13 +1,10 @@
 const io = require("socket.io")();
-const socketioJwt = require("socketio-jwt");
 
-const socketapi = {
-  io
-};
+const socketapi = { io };
 
 const gEmit = io.sockets.emit
 // Add your socket.io logic here!
-io.on( "connection", socketioJwt.authorize({
+io.on( "connection", require("socketio-jwt").authorize({
   secret: 'test123',
   // handshake: true,
   timeout: 15000

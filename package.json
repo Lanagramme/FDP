@@ -20,66 +20,77 @@
     "socketio-jwt": "^4.6.2",
     "uuid": "^8.3.2"
   },
-  "routes": {
-    "index": [
-      {
-        "path": "/",
-        "method": "get",
-        "name": "Express",
-        "page": "index",
-        "data": {
-          "page": "signin"
+  "routers": {
+    "index": {
+      "alias":"/",
+      "folder": "",
+      "routes":[
+        {
+          "path": "/",
+          "method": "get",
+          "namapiRoutere": "Express",
+          "page": "index",
+          "data": {
+            "page": "signin"
+          }
+        },
+        {
+          "path": "/home",
+          "method": "get",
+          "name": "Express",
+          "page": "index",
+          "data": {
+            "home": true
+          }
+        },
+        {
+          "path": "/inscription",
+          "method": "get",
+          "name": "Express",
+          "page": "index",
+          "data": {
+            "page": "signup"
+          }
+        },
+        {
+          "path": "/logged",
+          "method": "get",
+          "name": "Express",
+          "page": "index",
+          "data": {
+            "logged": true
+          }
         }
-      },
-      {
-        "path": "/home",
-        "method": "get",
-        "name": "Express",
-        "page": "index",
-        "data": {
-          "home": true
+      ]
+    },
+    "api": {
+      "alias": "/store",
+      "folder": "/store",
+      "routes":[
+        {
+          "path": "/*",
+          "method": "get",
+          "action": "read"
+        },
+        {
+          "path": "/*",
+          "method": "post",
+          "action": "create"
+        },
+        {
+          "path": "/*",
+          "method": "patch",
+          "action": "update"
+        },
+        {
+          "path": "/*",
+          "method": "delete",
+          "action": "delete"
         }
-      },
-      {
-        "path": "/inscription",
-        "method": "get",
-        "name": "Express",
-        "page": "index",
-        "data": {
-          "page": "signup"
-        }
-      },
-      {
-        "path": "/logged",
-        "method": "get",
-        "name": "Express",
-        "page": "index",
-        "data": {
-          "logged": true
-        }
-      }
-    ],
-    "api": [
-      {
-        "path": "/*",
-        "method": "get",
-        "action": "read"
-      },
-      {
-        "path": "/*",
-        "method": "post",
-        "action": "create"
-      },
-      {
-        "path": "/*",
-        "method": "patch",
-        "action": "update"
-      },
-      {
-        "path": "/*",
-        "method": "delete",
-        "action": "delete"
-      }
-    ]
-  }
+      ]
+    }
+  },
+  "ressources": [
+
+  ]
 }

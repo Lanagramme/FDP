@@ -5,4 +5,4 @@ function newIndexRoute(acc, item) {
   return acc
 }
 
-module.exports = require('../package.json').routes.index.reduce( newIndexRoute, require('express').Router() );
+module.exports = routes => routes.reduce( newIndexRoute, require('express').Router() );
