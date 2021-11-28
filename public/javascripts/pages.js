@@ -126,7 +126,7 @@ function page_user(){
           elements: "button",
           className: "btn btn-primary", 
           innerText: "Afficher",
-          onclick: "page_partie_en_cours_mj(" +id+")"
+          onclick: "page_partie_en_cours_mj('" +id+"')"
         }
       }
 

@@ -27,12 +27,13 @@ function ressourceSettings(app, express){
 
 // Ajout des routes de l'application(voir packages.json => routers)
 function routeSetting(app, routers, fs){
+  const functions = require("./routes/functions");
   for(routerKey in routers) {
     const dir = routers[routerKey].folder && __dirname+routers[routerKey].folder
     dir && !fs.existsSync(dir) && fs.mkdirSync(dir);
     app.use(
       routers[routerKey].alias || "/"+routerKey,
-      require('./routes/'+routerKey)(routers[routerKey].routes)
+      require('./routes/'+routerKey)(routers[routerKey].routes, functions)
     );
   }
 }

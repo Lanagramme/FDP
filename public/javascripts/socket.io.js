@@ -27,14 +27,14 @@ function socketError(msg){
   throw new Error(msg.data.type);
 }
 
-$.ajax({
-  method: 'POST',
-  url: '/users/login',
-  data: { email: 'test' },
-})
-.done(
-  res => (socketAuth(io.connect(), res.token))
-)
-.fail( (jqXHR, textStatus, errorThrown) => {
-  console.log(jqXHR, textStatus, errorThrown)
-})
+function socketConnect(data){
+  $.ajax({
+    method: 'POST',
+    url: '/users/login',
+    data,
+  })
+  .done( res => socketAuth(io.connect(), res.token) )
+  .fail( (jqXHR, textStatus, errorThrown) => {
+    console.log(jqXHR, textStatus, errorThrown)
+  })
+}

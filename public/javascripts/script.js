@@ -144,6 +144,7 @@ liste_statistiques = [
 		})
 		.done( res => {
 			window.localStorage.setItem('token', res._id)
+			socketConnect(res)
 			page_user()
 		})
 		.fail( res => cl(res))
@@ -202,6 +203,7 @@ liste_statistiques = [
 			}
 			cl(res)
 			print({ element: "a", innerText : '', href : "/", id:"in" }, Main)
+			socketConnect(res[0]);
 			window.localStorage.setItem('token', res[0]._id)
 			page_user()
 		})
