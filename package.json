@@ -28,7 +28,7 @@
         {
           "path": "/",
           "method": "get",
-          "namapiRoutere": "Express",
+          "name": "Express",
           "page": "index",
           "data": {
             "page": "signin"
@@ -86,6 +86,26 @@
           "path": "/*",
           "method": "delete",
           "action": "delete"
+        }
+      ]
+    },
+    "users": {
+      "alias": "",
+      "folder": "",
+      "routes":[
+        {
+          "path": "/login",
+          "methods": [
+            "createToken"
+          ],
+          "data": {
+            "req": [
+              "nom",
+              "mdp",
+              "email"
+            ]
+          }
+
         }
       ]
     }

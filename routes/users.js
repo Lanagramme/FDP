@@ -1,30 +1,16 @@
-const
-  express = require('express'),
-  router = express.Router(),
-  jwt = require('jsonwebtoken'),
-  fs = require('fs'),
-  uuid = require('uuid').v1
+function newUsersRoute(acc, item) {
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.json({this_is: 'a TRAP'});
-});
+  acc.post(item.path, (req, res, next)=>{
+    res.json(
+      (Array.isArray(item.methods) && item.methods || []).reduce(
+        (res, method) => Object.assign(res, this[method]( ...this.getParams(req.body,item.data) )),
+        {}
+      )
+    );
 
-router.post('/login', function (req, res) {
-  console.log(req.body)
-  // TODO: validate the actual user user
-  const profile = {
-    first_name: 'John',
-    last_name: 'Doe',
-    email: 'john@doe.com',
-    id: 123
-  };
+  })
 
-  // we are sending the profile in the token
-  const token = jwt.sign(profile, 'test123', { expiresIn: 60*5 });
+  return acc
+}
 
-  res.json({token: token});
-
-});
-
-module.exports = router;
+module.exports = (routes, methods) => routes.reduce( newUsersRoute.bind(methods), require('express').Router() );
